@@ -416,7 +416,7 @@ function factory (type, config, load, typed) {
    * @return {boolean}
    */
   parse.isAlpha = function isAlpha (c, cPrev, cNext) {
-    return parse.isValidLatinOrGreek(c) ||
+    return parse.isValidLatinOrGreekOrCyrillic(c) ||
         parse.isValidMathSymbol(c, cNext) ||
         parse.isValidMathSymbol(cPrev, c)
   }
@@ -426,8 +426,8 @@ function factory (type, config, load, typed) {
    * @param {string} c
    * @return {boolean}
    */
-  parse.isValidLatinOrGreek = function isValidLatinOrGreek (c) {
-    return /^[a-zA-Z_$\u00C0-\u02AF\u0370-\u03FF\u2100-\u214F]$/.test(c)
+  parse.isValidLatinOrGreekOrCyrillic = function isValidLatinOrGreekOrCyrillic (c) {
+    return /^[a-zA-Z_$\u00C0-\u02AF\u0370-\u03FF\u2100-\u214F\u0400-\u04FF]$/.test(c)
   }
 
   /**

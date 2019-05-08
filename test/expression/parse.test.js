@@ -75,6 +75,9 @@ describe('parse', function () {
     math.eval('$ab$c = 2', scope) // dollar sign
     assert.strictEqual(scope['$ab$c'], 2)
 
+    math.eval('абв = 2', scope) // Russian letters
+    assert.strictEqual(scope['абв'], 2)
+
     math.eval('\u00E9 = 2', scope) // Latin Small Letter E with Acute
     assert.strictEqual(scope['\u00E9'], 2)
 
@@ -2057,8 +2060,8 @@ describe('parse', function () {
       assert.ok('should expose isAlpha', typeof math.expression.parse.isAlpha === 'function')
     })
 
-    it('should expose isValidLatinOrGreek', function () {
-      assert.ok('should expose isAlpha', typeof math.expression.parse.isValidLatinOrGreek === 'function')
+    it('should expose isValidLatinOrGreekOrCyrillic', function () {
+      assert.ok('should expose isAlpha', typeof math.expression.parse.isValidLatinOrGreekOrCyrillic === 'function')
     })
 
     it('should expose isValidMathSymbol', function () {
