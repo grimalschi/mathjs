@@ -969,10 +969,11 @@ function factory (type, config, load, typed) {
    * @private
    */
   function parseImplicitMultiplication (state) {
-    let node, last
+    let node, last, previous
 
     node = parseRule2(state)
     last = node
+    previous = last
 
     while (true) {
       if ((state.tokenType === TOKENTYPE.SYMBOL) ||
@@ -983,11 +984,20 @@ function factory (type, config, load, typed) {
           (state.token === '(')) {
         // parse implicit multiplication
         //
-        // symbol:      implicit multiplication like '2a', '(2+3)a', 'a b'
+        // symbol:      implicit multiplication like '2a', '(2+3)a'
         // number:      implicit multiplication like '(2+3)2'
         // parenthesis: implicit multiplication like '2(3+4)', '(3+4)(1+2)'
+        //
+        // or join space separated symbols like 'a b' and 'a 1'
         last = parseRule2(state)
-        node = new OperatorNode('*', 'multiply', [node, last], true /* implicit */)
+        if (previous instanceof SymbolNode && previous.name !== 'i' && last instanceof SymbolNode && last.name !== 'i') {
+          previous.name += ' ' + last.name
+        } else if (previous instanceof SymbolNode && previous.name !== 'i' && last instanceof ConstantNode) {
+          previous.name += ' ' + last.value
+        } else {
+          node = new OperatorNode('*', 'multiply', [node, last], true /* implicit */)
+          previous = last
+        }
       } else {
         break
       }

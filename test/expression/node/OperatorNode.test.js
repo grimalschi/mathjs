@@ -680,15 +680,15 @@ describe('OperatorNode', function () {
 
     assert.strictEqual(c.toString(), c.toString({ implicit: 'hide' }))
     assert.strictEqual(c.toString({ implicit: 'hide' }), 'a b')
-    assert.strictEqual(c.toString({ implicit: 'show' }), 'a * b')
+    assert.strictEqual(c.toString({ implicit: 'show' }), 'a b')
 
     assert.strictEqual(d.toString(), d.toString({ implicit: 'hide' }))
     assert.strictEqual(d.toString({ implicit: 'hide' }), '2 a b')
-    assert.strictEqual(d.toString({ implicit: 'show' }), '2 * a * b')
+    assert.strictEqual(d.toString({ implicit: 'show' }), '2 * a b')
 
     assert.strictEqual(e.toString(), e.toString({ implicit: 'hide' }))
     assert.strictEqual(e.toString({ implicit: 'hide' }), 'a b c')
-    assert.strictEqual(e.toString({ implicit: 'show' }), 'a * b * c')
+    assert.strictEqual(e.toString({ implicit: 'show' }), 'a b c')
 
     assert.strictEqual(f.toString(), f.toString({ implicit: 'hide' }))
     assert.strictEqual(f.toString({ implicit: 'hide' }), '(2 + 3) a')
@@ -742,16 +742,16 @@ describe('OperatorNode', function () {
     assert.strictEqual(b.toTex({ implicit: 'show' }), '4\\cdot a')
 
     assert.strictEqual(c.toTex(), c.toTex({ implicit: 'hide' }))
-    assert.strictEqual(c.toTex({ implicit: 'hide' }), ' a~\\mathrm{b}')
-    assert.strictEqual(c.toTex({ implicit: 'show' }), ' a\\cdot\\mathrm{b}')
+    assert.strictEqual(c.toTex({ implicit: 'hide' }), ' a~b')
+    assert.strictEqual(c.toTex({ implicit: 'show' }), ' a~b')
 
     assert.strictEqual(d.toTex(), d.toTex({ implicit: 'hide' }))
-    assert.strictEqual(d.toTex({ implicit: 'hide' }), '2~ a~\\mathrm{b}')
-    assert.strictEqual(d.toTex({ implicit: 'show' }), '2\\cdot a\\cdot\\mathrm{b}')
+    assert.strictEqual(d.toTex({ implicit: 'hide' }), '2~ a~b')
+    assert.strictEqual(d.toTex({ implicit: 'show' }), '2\\cdot a~b')
 
     assert.strictEqual(e.toTex(), e.toTex({ implicit: 'hide' }))
-    assert.strictEqual(e.toTex({ implicit: 'hide' }), ' a~\\mathrm{b}~ c')
-    assert.strictEqual(e.toTex({ implicit: 'show' }), ' a\\cdot\\mathrm{b}\\cdot c')
+    assert.strictEqual(e.toTex({ implicit: 'hide' }), ' a~b~c')
+    assert.strictEqual(e.toTex({ implicit: 'show' }), ' a~b~c')
 
     assert.strictEqual(f.toTex(), f.toTex({ implicit: 'hide' }))
     assert.strictEqual(f.toTex({ implicit: 'hide' }), '\\left(2+3\\right)~ a')
